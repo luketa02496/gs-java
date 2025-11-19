@@ -1,6 +1,7 @@
 package com.lucas.work_well.controller;
 
 import com.lucas.work_well.model.dto.UserDTO;
+import com.lucas.work_well.model.dto.UserResponseDTO;
 import com.lucas.work_well.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +17,45 @@ public class UserController {
         this.svc = svc;
     }
 
+    
     @PostMapping
-    public ResponseEntity<UserDTO> create(@Valid @RequestBody UserDTO dto) {
+    public ResponseEntity<UserResponseDTO> create(@Valid @RequestBody UserDTO dto) {
         UserDTO created = svc.create(dto);
-        return ResponseEntity.status(201).body(created);
+
+        UserResponseDTO response = new UserResponseDTO(
+                created.getId(),
+                created.getNome(),
+                created.getEmail()
+        );
+
+        return ResponseEntity.status(201).body(response);
     }
 
+    
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDTO> getById(@PathVariable Long id) {
         return svc.findById(id)
-                .map(u -> {
-                    UserDTO dto = new UserDTO();
-                    dto.setId(u.getId());
-                    dto.setNome(u.getNome());
-                    dto.setEmail(u.getEmail());
-                    
-                    return ResponseEntity.ok(dto);
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .map(user -> ResponseEntity.ok(
+                        new UserResponseDTO(
+                                user.getId(),
+                                user.getNome(),
+                                user.getEmail()
+                        )
+                ))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    
+    @GetMapping("/{email}")
+    public ResponseEntity<UserResponseDTO> getByEmail(@PathVariable String email) {
+        return svc.findByEmail(email)
+                .map(user -> ResponseEntity.ok(
+                        new UserResponseDTO(
+                                user.getId(),
+                                user.getNome(),
+                                user.getEmail()
+                        )
+                ))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
