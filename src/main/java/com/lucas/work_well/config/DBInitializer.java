@@ -5,6 +5,7 @@ import com.lucas.work_well.model.entity.User;
 import com.lucas.work_well.repository.DailyAssessmentRepository;
 import com.lucas.work_well.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -14,10 +15,14 @@ public class DBInitializer {
 
     private final UserRepository userRepo;
     private final DailyAssessmentRepository assessmentRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public DBInitializer(UserRepository userRepo, DailyAssessmentRepository assessmentRepo) {
+    public DBInitializer(UserRepository userRepo,
+                         DailyAssessmentRepository assessmentRepo,
+                         PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.assessmentRepo = assessmentRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -26,21 +31,21 @@ public class DBInitializer {
             User admin = User.builder()
                     .nome("Administrador")
                     .email("admin@workwell.com")
-                    .senha("123456") 
+                    .senha(passwordEncoder.encode("123456"))
                     .role("ROLE_ADMIN")
                     .build();
 
             User user = User.builder()
                     .nome("Lucas")
                     .email("lucas@workwell.com")
-                    .senha("654321")
+                    .senha(passwordEncoder.encode("654321"))
                     .role("ROLE_USER")
                     .build();
-            
+
             User user1 = User.builder()
                     .nome("Marcella")
-                    .email("Marcella@workwell.com")
-                    .senha("abc123") 
+                    .email("marcella@workwell.com")
+                    .senha(passwordEncoder.encode("abc123"))
                     .role("ROLE_ADMIN")
                     .build();
 

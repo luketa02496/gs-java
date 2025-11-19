@@ -46,7 +46,7 @@ public class UserController {
     }
 
     
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<UserResponseDTO> getByEmail(@PathVariable String email) {
         return svc.findByEmail(email)
                 .map(user -> ResponseEntity.ok(
