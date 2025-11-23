@@ -156,6 +156,7 @@ senha 654321
 | `GET`    | `/api/users/email/{email}`      | Buscar usuario por email   |
 | `GET`    | `/api/users/{id}` | Buscar usuário    |
 
+para usar o get by email voce deve trocar o @ por %40. EX: lucas%40workwell.com
 
 ---
 
