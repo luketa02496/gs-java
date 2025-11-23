@@ -153,10 +153,9 @@ senha 654321
 | Método   | Endpoint          | Descrição         |
 | -------- | ----------------- | ----------------- |
 | `POST`   | `/api/users`      | Criar usuário     |
-| `GET`    | `/api/users`      | Listar usuários   |
+| `GET`    | `/api/users/email/{email}`      | Buscar usuario por email   |
 | `GET`    | `/api/users/{id}` | Buscar usuário    |
-| `PUT`    | `/api/users/{id}` | Atualizar usuário |
-| `DELETE` | `/api/users/{id}` | Excluir usuário   |
+
 
 ---
 
@@ -165,8 +164,6 @@ senha 654321
 | Método | Endpoint                         | Descrição              |
 | ------ | -------------------------------- | ---------------------- |
 | `POST` | `/api/assessments`               | Criar avaliação        |
-| `GET`  | `/api/assessments`               | Listar avaliações      |
-| `GET`  | `/api/assessments/{id}`          | Buscar avaliação       |
 | `GET`  | `/api/assessments/user/{userId}` | Avaliações por usuário |
 
 ---
