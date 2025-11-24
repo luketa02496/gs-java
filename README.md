@@ -164,8 +164,8 @@ para usar o get by email voce deve trocar o @ por %40. EX: lucas%40workwell.com
 
 | Método | Endpoint                         | Descrição              |
 | ------ | -------------------------------- | ---------------------- |
-| `POST` | `/api/assessments`               | Criar avaliação        |
-| `GET`  | `/api/assessments/user/{userId}` | Avaliações por usuário |
+| `POST` | `/api/daily`                     | Criar avaliação        |
+| `GET`  | `/api/daily/user/{userId}`       | Avaliações por usuário |
 
 ---
 
